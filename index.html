@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEMI GMAO — Améliorations V1.5 | Explorialabs X Forrestgroupe</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+html{scroll-behavior:smooth}
+body{background:#fff;background-image:radial-gradient(circle,#e5e7eb 1px,transparent 1px);background-size:24px 24px;overflow-x:hidden}
+.fade-in{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.slide-left{opacity:0;transform:translateX(-60px);transition:opacity 0.7s ease,transform 0.7s ease}
+.slide-left.visible{opacity:1;transform:translateX(0)}
+.slide-right{opacity:0;transform:translateX(60px);transition:opacity 0.7s ease,transform 0.7s ease}
+.slide-right.visible{opacity:1;transform:translateX(0)}
+.neo-frame{border:4px solid #000;box-shadow:8px 8px 0px 0px rgba(0,0,0,1);transition:transform 0.3s ease,box-shadow 0.3s ease}
+.neo-frame:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0px 0px rgba(0,0,0,1)}
+.neo-box{border:4px solid #000;box-shadow:8px 8px 0px 0px rgba(0,0,0,1)}
+.neo-box-sm{border:3px solid #000;box-shadow:5px 5px 0px 0px rgba(0,0,0,1)}
+.accent-blue{background:#3B82F6}
+.accent-yellow{background:#FBBF24}
+.accent-green{background:#10B981}
+.accent-red{background:#EF4444}
+.accent-purple{background:#8B5CF6}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#3B82F6,#8B5CF6,#EF4444,#FBBF24,#10B981);z-index:9999;transition:width 0.15s ease}
+.nav-dot{width:12px;height:12px;border-radius:50%;border:2px solid #000;background:#fff;transition:all 0.3s ease;cursor:pointer}
+.nav-dot.active{background:#3B82F6;transform:scale(1.3)}
+.nav-dot:hover{background:#FBBF24;transform:scale(1.2)}
+@keyframes spin360{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.spin-logo{animation:spin360 1s ease-in-out}
+@keyframes confetti-fall{0%{transform:translateY(-100vh) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+.confetti-piece{position:fixed;width:10px;height:10px;z-index:99999;animation:confetti-fall 3s ease-in forwards}
+@keyframes rainbow-border{0%{border-color:#EF4444}14%{border-color:#F97316}28%{border-color:#FBBF24}42%{border-color:#10B981}57%{border-color:#3B82F6}71%{border-color:#6366F1}85%{border-color:#8B5CF6}100%{border-color:#EF4444}}
+.rainbow-border{animation:rainbow-border 2s linear infinite;transform:rotate(1deg) scale(1.02)}
+.screenshot-img{transition:all 0.3s ease}
+.sommaire-link{transition:all 0.2s ease}
+.sommaire-link:hover{transform:translateX(8px);background:#FBBF24}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float-anim{animation:float 3s ease-in-out infinite}
+.section-wrapper{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 1rem}
+@media(max-width:768px){.section-wrapper{padding:4rem 0.5rem}}
+</style>
+</head>
+<body class="font-sans text-gray-900">
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+
+<!-- HEADER -->
+<header class="fixed top-1 left-0 right-0 z-50 flex justify-center pointer-events-none" style="padding-top:4px">
+<div class="pointer-events-auto bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] px-6 py-2 flex items-center gap-3">
+<span id="headerLogo" class="font-black text-lg cursor-pointer select-none" onclick="spinLogo(this)">&#9670;</span>
+<span class="font-black text-sm md:text-base tracking-tight">Explorialabs X Forrestgroupe</span>
+</div>
+</header>
+
+<!-- FOOTER -->
+<footer class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pointer-events-none" style="padding-bottom:4px">
+<div class="pointer-events-auto bg-black text-white px-6 py-2 text-xs md:text-sm font-bold tracking-wide">
+Explorialabs X Forrestgroupe &mdash; AEMI GMAO 2026
+</div>
+</footer>
+
+<!-- NAV DOTS -->
+<nav class="fixed right-3 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 hidden md:flex" id="navDots"></nav>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: COVER -->
+<!-- ============================================================ -->
+<section id="section-1" class="section-wrapper" data-section="1">
+<div class="max-w-5xl mx-auto text-center fade-in">
+<div class="mb-6">
+<span class="inline-block bg-black text-white font-black text-sm px-4 py-2 tracking-widest uppercase">Explorialabs X Forrestgroupe</span>
+</div>
+<h1 id="coverTitle" class="text-5xl md:text-8xl font-black leading-tight mb-6 cursor-pointer select-none" onclick="handleCoverClick()">
+AEMI GMAO
+</h1>
+<div class="neo-box inline-block bg-blue-500 text-white px-8 py-4 mb-8">
+<span class="text-2xl md:text-4xl font-black">Améliorations V1.5</span>
+</div>
+<p class="text-xl md:text-2xl font-bold text-gray-600 mb-4">Présentation des évolutions &amp; corrections</p>
+<p class="text-lg font-semibold text-gray-400">Février 2026</p>
+<div class="mt-10 float-anim">
+<svg class="mx-auto w-8 h-8 text-gray-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: SOMMAIRE -->
+<!-- ============================================================ -->
+<section id="section-2" class="section-wrapper" data-section="2">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Sommaire</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<a href="#section-3" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-blue-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">1</span><span class="font-bold text-sm">Contexte &amp; Objectifs</span></a>
+<a href="#section-5" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-yellow-400 text-black font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">2</span><span class="font-bold text-sm">Page de Connexion</span></a>
+<a href="#section-7" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-green-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">3</span><span class="font-bold text-sm">Tableau de Bord</span></a>
+<a href="#section-14" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-red-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">4</span><span class="font-bold text-sm">Interventions</span></a>
+<a href="#section-22" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-purple-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">5</span><span class="font-bold text-sm">Équipements</span></a>
+<a href="#section-27" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-blue-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">6</span><span class="font-bold text-sm">Planning</span></a>
+<a href="#section-30" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-yellow-400 text-black font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">7</span><span class="font-bold text-sm">Clients</span></a>
+<a href="#section-35" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-green-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">8</span><span class="font-bold text-sm">Équipes</span></a>
+<a href="#section-39" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-red-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">9</span><span class="font-bold text-sm">Facturation</span></a>
+<a href="#section-43" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-purple-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">10</span><span class="font-bold text-sm">Reporting &amp; Analyse</span></a>
+<a href="#section-48" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-blue-500 text-white font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">11</span><span class="font-bold text-sm">Corrections Techniques</span></a>
+<a href="#section-50" class="sommaire-link neo-box-sm bg-white p-3 flex items-center gap-3 no-underline text-black"><span class="bg-yellow-400 text-black font-black w-8 h-8 flex items-center justify-center text-sm flex-shrink-0">12</span><span class="font-bold text-sm">Bilan &amp; Remerciements</span></a>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: CONTEXTE -->
+<!-- ============================================================ -->
+<section id="section-3" class="section-wrapper" data-section="3">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Contexte</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-2xl font-black mb-4">Qu'est-ce que AEMI ?</h3>
+<p class="text-lg leading-relaxed mb-4">
+AEMI est une application de <strong>gestion de maintenance industrielle</strong> (GMAO) développée pour le <strong>Forrest Groupe</strong> en République Démocratique du Congo.
+</p>
+<p class="text-lg leading-relaxed mb-4">
+En termes simples, c'est un outil qui aide les équipes à <strong>suivre, planifier et gérer</strong> toutes les interventions de maintenance sur les équipements industriels — principalement des <strong>groupes électrogènes</strong>.
+</p>
+<p class="text-lg leading-relaxed">
+L'application permet de savoir <strong>quel équipement a besoin de maintenance</strong>, <strong>qui s'en occupe</strong>, et <strong>où en est chaque intervention</strong>.
+</p>
+</div>
+<div class="space-y-4">
+<div class="neo-box bg-blue-50 p-5">
+<span class="font-black text-blue-600 text-lg">&#9879; Maintenance</span>
+<p class="text-sm mt-1">Suivi complet des interventions préventives et correctives</p>
+</div>
+<div class="neo-box bg-yellow-50 p-5">
+<span class="font-black text-yellow-600 text-lg">&#9873; Localisation</span>
+<p class="text-sm mt-1">Carte interactive des équipements au Congo</p>
+</div>
+<div class="neo-box bg-green-50 p-5">
+<span class="font-black text-green-600 text-lg">&#9776; Planning</span>
+<p class="text-sm mt-1">Calendrier et planification des équipes</p>
+</div>
+<div class="neo-box bg-purple-50 p-5">
+<span class="font-black text-purple-600 text-lg">&#9638; Reporting</span>
+<p class="text-sm mt-1">Statistiques et analyses de performance</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: OBJECTIFS -->
+<!-- ============================================================ -->
+<section id="section-4" class="section-wrapper" data-section="4">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Objectifs</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Nous avons audité <strong>75 points de retour client</strong> et voici le résultat de notre travail sur cette version 1.5 :
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+<div class="neo-box bg-green-400 p-6 text-center">
+<div class="text-5xl font-black">46</div>
+<div class="font-bold mt-2">Points résolus</div>
+</div>
+<div class="neo-box bg-yellow-300 p-6 text-center">
+<div class="text-5xl font-black">14</div>
+<div class="font-bold mt-2">Partiellement résolus</div>
+</div>
+<div class="neo-box bg-blue-400 text-white p-6 text-center">
+<div class="text-5xl font-black">11</div>
+<div class="font-bold mt-2">Nouvelles fonctionnalités</div>
+</div>
+<div class="neo-box bg-white p-6 text-center">
+<div class="text-5xl font-black">75</div>
+<div class="font-bold mt-2">Points audités au total</div>
+</div>
+</div>
+<p class="text-lg text-gray-500">
+Les 4 points restants sont prévus pour la version 2.0 et nécessitent des changements plus importants.
+</p>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: LOGIN AVANT -->
+<!-- ============================================================ -->
+<section id="section-5" class="section-wrapper" data-section="5">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Page de Connexion</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-4 text-red-500">AVANT</h3>
+<p class="text-lg leading-relaxed mb-6">
+L'ancienne page de connexion avait un fond <strong>clair et uni</strong>. C'était fonctionnel, on pouvait se connecter sans problème, mais visuellement ce n'était pas très impressionnant.
+</p>
+<div class="bg-gray-100 border-4 border-dashed border-gray-300 p-12 text-center rounded-none">
+<div class="text-6xl mb-4 opacity-30">&#128274;</div>
+<p class="text-gray-400 font-bold">Fond clair, simple, sans identité visuelle forte</p>
+<div class="mt-6 mx-auto max-w-xs bg-white border-2 border-gray-200 p-6 rounded">
+<div class="h-4 bg-gray-200 w-3/4 mx-auto mb-3 rounded"></div>
+<div class="h-8 bg-gray-100 w-full mb-3 rounded border"></div>
+<div class="h-8 bg-gray-100 w-full mb-3 rounded border"></div>
+<div class="h-8 bg-gray-300 w-full rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: LOGIN APRÈS -->
+<!-- ============================================================ -->
+<section id="section-6" class="section-wrapper" data-section="6">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Connexion — Après</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-4 text-green-500">APRÈS</h3>
+<p class="text-lg leading-relaxed mb-6">
+La nouvelle page de connexion utilise un <strong>dégradé bleu foncé</strong> (du bleu marine vers le bleu ciel). Cela donne un aspect beaucoup plus <strong>professionnel</strong> et inspire davantage <strong>confiance et sécurité</strong>.
+</p>
+<div class="bg-gradient-to-br from-blue-900 via-blue-700 to-sky-400 border-4 border-black p-12 text-center rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+<div class="text-6xl mb-4">&#128274;</div>
+<p class="text-white font-bold text-lg mb-6">Dégradé bleu professionnel</p>
+<div class="mt-4 mx-auto max-w-xs bg-white/95 border-2 border-black p-6">
+<div class="h-4 bg-blue-200 w-3/4 mx-auto mb-3 rounded"></div>
+<div class="h-8 bg-white w-full mb-3 rounded border-2 border-gray-300"></div>
+<div class="h-8 bg-white w-full mb-3 rounded border-2 border-gray-300"></div>
+<div class="h-8 bg-blue-600 w-full rounded"></div>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="neo-box-sm bg-green-50 p-4 text-center"><span class="font-black text-green-600">&#10003;</span> Fond dégradé bleu foncé</div>
+<div class="neo-box-sm bg-green-50 p-4 text-center"><span class="font-black text-green-600">&#10003;</span> Aspect premium</div>
+<div class="neo-box-sm bg-green-50 p-4 text-center"><span class="font-black text-green-600">&#10003;</span> Formulaire inchangé</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: DASHBOARD VUE D'ENSEMBLE -->
+<!-- ============================================================ -->
+<section id="section-7" class="section-wrapper" data-section="7">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Tableau de Bord</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Voici le tableau de bord principal. On y voit les <strong>KPIs en haut</strong>, la <strong>carte au centre</strong>, et les <strong>interventions récentes en bas</strong>.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102318.png" alt="Dashboard overview avec KPIs et carte" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: DASHBOARD KPIs -->
+<!-- ============================================================ -->
+<section id="section-8" class="section-wrapper" data-section="8">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">KPIs du Tableau de Bord</h2>
+</div>
+<p class="text-lg mb-8">
+Les cartes KPI en haut du tableau de bord donnent une vue rapide de l'état des opérations. Voici ce qu'elles montrent :
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+<div class="neo-box bg-blue-50 p-6">
+<div class="text-3xl font-black text-blue-600 mb-2">Total Interventions</div>
+<p class="text-base">Le nombre total de toutes les interventions enregistrées dans le système.</p>
+</div>
+<div class="neo-box bg-yellow-50 p-6">
+<div class="text-3xl font-black text-yellow-600 mb-2">En Cours</div>
+<p class="text-base">Les interventions actuellement en cours de traitement par les techniciens.</p>
+</div>
+<div class="neo-box bg-green-50 p-6">
+<div class="text-3xl font-black text-green-600 mb-2">Taux de Résolution</div>
+<p class="text-base">Le pourcentage d'interventions terminées avec succès.</p>
+</div>
+<div class="neo-box bg-purple-50 p-6">
+<div class="text-3xl font-black text-purple-600 mb-2">Répartition Types</div>
+<p class="text-base"><strong>NOUVEAU :</strong> Remplace l'ancien KPI "Complétées". Affiche des <strong>barres de couleur</strong> montrant la répartition entre préventif, correctif et installation.</p>
+<span class="inline-block mt-2 bg-purple-500 text-white text-xs font-black px-2 py-1">NOUVEAUTÉ V1.5</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: DASHBOARD INTERVENTIONS RÉCENTES -->
+<!-- ============================================================ -->
+<section id="section-9" class="section-wrapper" data-section="9">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Interventions Récentes</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La liste des dernières interventions avec leur <strong>statut</strong>, <strong>priorité</strong> et <strong>technicien assigné</strong>. Cela permet de voir en un coup d'oeil ce qui se passe sur le terrain.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102338.png" alt="Interventions Récentes du dashboard" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 10: DASHBOARD ALERTES -->
+<!-- ============================================================ -->
+<section id="section-10" class="section-wrapper" data-section="10">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Alertes &amp; Rappels</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Les alertes et rappels importants sont affichés clairement. Les interventions <strong>en retard apparaissent en rouge</strong>. Nous avons ajouté une <strong>légende</strong> pour que chaque couleur soit facilement compréhensible.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102353.png" alt="Alertes et Rappels" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 11: DASHBOARD CARTE -->
+<!-- ============================================================ -->
+<section id="section-11" class="section-wrapper" data-section="11">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Carte des Équipements</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La carte interactive montre <strong>où se trouvent tous les équipements</strong> au Congo. On peut cliquer sur un point pour voir les détails de l'équipement correspondant.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102818.png" alt="Carte des Équipements" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 12: DASHBOARD AMÉLIORATIONS -->
+<!-- ============================================================ -->
+<section id="section-12" class="section-wrapper" data-section="12">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Améliorations Dashboard</h2>
+</div>
+<p class="text-lg mb-8">
+Voici la liste complète de toutes les améliorations apportées au tableau de bord :
+</p>
+<div class="space-y-4">
+<div class="neo-box-sm bg-white p-5 flex items-start gap-4 slide-left">
+<span class="bg-blue-500 text-white font-black w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">1</span>
+<div><strong>Nouveau KPI "Répartition Types"</strong> — Remplace "Complétées" par des barres de couleur montrant préventif, correctif et installation.</div>
+</div>
+<div class="neo-box-sm bg-white p-5 flex items-start gap-4 slide-left">
+<span class="bg-red-500 text-white font-black w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">2</span>
+<div><strong>Légende rouge ajoutée</strong> — Les interventions en retard ont maintenant une explication visible en rouge.</div>
+</div>
+<div class="neo-box-sm bg-white p-5 flex items-start gap-4 slide-left">
+<span class="bg-yellow-400 text-black font-black w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">3</span>
+<div><strong>Infobulles (tooltips)</strong> — En survolant les éléments, des explications supplémentaires apparaissent.</div>
+</div>
+<div class="neo-box-sm bg-white p-5 flex items-start gap-4 slide-left">
+<span class="bg-green-500 text-white font-black w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">4</span>
+<div><strong>Accents corrigés sur les graphiques</strong> — "Preventive" est devenu "Préventive", "Completee" est devenu "Complétée".</div>
+</div>
+<div class="neo-box-sm bg-white p-5 flex items-start gap-4 slide-left">
+<span class="bg-purple-500 text-white font-black w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">5</span>
+<div><strong>Espacement réduit</strong> — Les éléments sont plus rapprochés pour afficher plus d'informations à l'écran.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 13: DASHBOARD RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-13" class="section-wrapper" data-section="13">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Dashboard</h2>
+</div>
+<div class="neo-box bg-blue-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements du Tableau de Bord</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Nouveau KPI "Répartition Types" avec barres colorées</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Légende ajoutée pour les alertes en retard</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Infobulles explicatives sur les KPIs</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Accents français corrigés sur tous les graphiques</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Espacement optimisé pour plus de lisibilité</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Carte interactive avec détails au clic</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 14: INTERVENTIONS LISTE -->
+<!-- ============================================================ -->
+<section id="section-14" class="section-wrapper" data-section="14">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Interventions</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La page principale des interventions. On voit <strong>toutes les interventions</strong> avec leurs filtres par statut, priorité et type. C'est le coeur de l'application.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102407.png" alt="Liste des Interventions" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 15: INTERVENTIONS EN RETARD -->
+<!-- ============================================================ -->
+<section id="section-15" class="section-wrapper" data-section="15">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Filtre "En Retard"</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le filtre <strong>"En retard"</strong> montre les interventions qui dépassent la date prévue. Nous avons <strong>harmonisé la logique</strong> pour exclure automatiquement celles qui sont déjà en cours de traitement.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102427.png" alt="Interventions En retard" class="w-full screenshot-img" loading="lazy">
+</div>
+<div class="mt-6 neo-box-sm bg-red-50 p-4 inline-block">
+<span class="font-black text-red-600">&#9888; Logique améliorée :</span> Les interventions "En cours" ne sont plus comptées comme "En retard"
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 16: INTERVENTIONS CRÉATION -->
+<!-- ============================================================ -->
+<section id="section-16" class="section-wrapper" data-section="16">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Créer une Intervention</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le formulaire pour créer une nouvelle intervention. <strong>Simple et rapide</strong> : on choisit le type, l'équipement, la priorité, et on assigne un technicien.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102602.png" alt="Créer une intervention" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 17: INTERVENTIONS DÉTAIL -->
+<!-- ============================================================ -->
+<section id="section-17" class="section-wrapper" data-section="17">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Détail d'une Intervention</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La page détail montre le <strong>pipeline de statut</strong> en haut de la page. On peut suivre l'avancement étape par étape :
+</p>
+<div class="flex flex-wrap gap-2 mb-8 items-center">
+<span class="neo-box-sm bg-gray-100 px-4 py-2 font-bold">Créée</span>
+<span class="text-2xl font-black">&#8594;</span>
+<span class="neo-box-sm bg-blue-100 px-4 py-2 font-bold">Assignée</span>
+<span class="text-2xl font-black">&#8594;</span>
+<span class="neo-box-sm bg-yellow-100 px-4 py-2 font-bold">En cours</span>
+<span class="text-2xl font-black">&#8594;</span>
+<span class="neo-box-sm bg-green-100 px-4 py-2 font-bold">Terminée</span>
+<span class="text-2xl font-black">&#8594;</span>
+<span class="neo-box-sm bg-purple-100 px-4 py-2 font-bold">Validée</span>
+</div>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102457.png" alt="Détail intervention avec pipeline" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 18: INTERVENTIONS PHOTOS -->
+<!-- ============================================================ -->
+<section id="section-18" class="section-wrapper" data-section="18">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Photos d'Intervention</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="neo-box bg-red-50 p-8">
+<h3 class="text-2xl font-black text-red-500 mb-4">AVANT</h3>
+<p class="text-lg leading-relaxed">
+Seuls les <strong>administrateurs</strong> pouvaient ajouter des photos aux interventions. Les techniciens et superviseurs sur le terrain ne pouvaient pas documenter visuellement leur travail.
+</p>
+<div class="mt-4 text-center text-6xl opacity-30">&#128247;</div>
+<p class="text-center text-red-400 font-bold">Limité aux admins uniquement</p>
+</div>
+<div class="neo-box bg-green-50 p-8">
+<h3 class="text-2xl font-black text-green-500 mb-4">APRÈS</h3>
+<p class="text-lg leading-relaxed">
+Les <strong>techniciens</strong>, <strong>superviseurs</strong> et <strong>admins</strong> peuvent maintenant tous ajouter des photos. Cela permet une meilleure documentation du travail sur le terrain.
+</p>
+<div class="mt-4 text-center text-6xl">&#128247;</div>
+<p class="text-center text-green-600 font-bold">Tous les rôles peuvent ajouter des photos</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 19: INTERVENTIONS VALIDATION -->
+<!-- ============================================================ -->
+<section id="section-19" class="section-wrapper" data-section="19">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Validation Admin</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-6">Modification post-validation</h3>
+<p class="text-lg leading-relaxed mb-6">
+Avant, une fois qu'une intervention était validée, personne ne pouvait modifier les champs de résultat. C'était un problème car parfois l'admin devait corriger des informations après coup.
+</p>
+<p class="text-lg leading-relaxed mb-6">
+<strong>Maintenant</strong>, l'administrateur peut modifier les champs suivants même après la validation :
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="neo-box-sm bg-blue-50 p-4 text-center">
+<div class="text-3xl mb-2">&#128295;</div>
+<span class="font-black">Travaux effectués</span>
+</div>
+<div class="neo-box-sm bg-yellow-50 p-4 text-center">
+<div class="text-3xl mb-2">&#128269;</div>
+<span class="font-black">Diagnostic</span>
+</div>
+<div class="neo-box-sm bg-green-50 p-4 text-center">
+<div class="text-3xl mb-2">&#128172;</div>
+<span class="font-black">Recommandations</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 20: INTERVENTIONS ESPACEMENT -->
+<!-- ============================================================ -->
+<section id="section-20" class="section-wrapper" data-section="20">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Espacement Réduit</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<p class="text-lg leading-relaxed mb-8">
+On a <strong>réduit l'espacement</strong> entre les éléments sur toutes les pages d'interventions. Le but : afficher <strong>plus d'informations sur un même écran</strong> sans avoir à faire défiler.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="text-center">
+<h4 class="font-black text-red-500 mb-4">AVANT</h4>
+<div class="bg-gray-50 border-2 border-dashed border-gray-300 p-4">
+<div class="bg-white border border-gray-200 p-6 mb-6">Élément 1</div>
+<div class="bg-white border border-gray-200 p-6 mb-6">Élément 2</div>
+<div class="bg-white border border-gray-200 p-6">Élément 3</div>
+</div>
+<p class="text-sm text-gray-400 mt-2">Grands espaces entre les éléments</p>
+</div>
+<div class="text-center">
+<h4 class="font-black text-green-500 mb-4">APRÈS</h4>
+<div class="bg-gray-50 border-2 border-dashed border-green-300 p-4">
+<div class="bg-white border border-gray-200 p-4 mb-2">Élément 1</div>
+<div class="bg-white border border-gray-200 p-4 mb-2">Élément 2</div>
+<div class="bg-white border border-gray-200 p-4 mb-2">Élément 3</div>
+<div class="bg-white border border-gray-200 p-4 mb-2">Élément 4</div>
+<div class="bg-white border border-gray-200 p-4">Élément 5</div>
+</div>
+<p class="text-sm text-green-500 mt-2">Plus compact, plus d'éléments visibles</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 21: INTERVENTIONS RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-21" class="section-wrapper" data-section="21">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Interventions</h2>
+</div>
+<div class="neo-box bg-red-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur les Interventions</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Filtre "En retard" harmonisé (exclut les interventions en cours)</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Pipeline de statut visuel (Créée → Validée)</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Ajout de photos par tous les rôles (techniciens, superviseurs, admins)</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Modification post-validation pour les admins</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Espacement réduit pour plus de lisibilité</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Formulaire de création simplifié</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 22: ÉQUIPEMENTS LISTE -->
+<!-- ============================================================ -->
+<section id="section-22" class="section-wrapper" data-section="22">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Équipements</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La liste de tous les <strong>groupes électrogènes</strong> avec leur statut, emplacement et date de dernière maintenance. C'est la base de données de tout le parc d'équipements.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102514.png" alt="Liste des Équipements GE" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 23: ÉQUIPEMENTS DÉTAIL -->
+<!-- ============================================================ -->
+<section id="section-23" class="section-wrapper" data-section="23">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Fiche Équipement</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La fiche détaillée d'un équipement avec son <strong>historique</strong>, ses <strong>heures de fonctionnement</strong> et ses <strong>interventions associées</strong>.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102540.png" alt="Détail d'un équipement" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 24: ÉQUIPEMENTS HEURES -->
+<!-- ============================================================ -->
+<section id="section-24" class="section-wrapper" data-section="24">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Compteur d'Heures</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<p class="text-lg leading-relaxed mb-8">
+Le compteur d'heures de fonctionnement est maintenant affiché <strong>en plus petit</strong> pour un meilleur équilibre visuel sur la page. Cela permet de voir toutes les informations importantes sans qu'un seul chiffre domine la page.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="text-center">
+<h4 class="font-black text-red-500 mb-4">AVANT</h4>
+<div class="neo-box-sm bg-gray-50 p-8">
+<div class="text-6xl font-black">12 450h</div>
+<p class="text-sm text-gray-400 mt-2">text-4xl — Trop imposant</p>
+</div>
+</div>
+<div class="text-center">
+<h4 class="font-black text-green-500 mb-4">APRÈS</h4>
+<div class="neo-box-sm bg-green-50 p-8">
+<div class="text-3xl font-black">12 450h</div>
+<p class="text-sm text-green-500 mt-2">text-2xl — Plus équilibré</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 25: ÉQUIPEMENTS ESPACEMENT -->
+<!-- ============================================================ -->
+<section id="section-25" class="section-wrapper" data-section="25">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Espacement Équipements</h2>
+</div>
+<div class="neo-box bg-white p-8">
+<p class="text-lg leading-relaxed mb-6">
+Comme pour les interventions, l'espacement entre les éléments a été <strong>réduit</strong> sur les pages d'équipements pour une vue plus <strong>compacte et professionnelle</strong>.
+</p>
+<div class="neo-box-sm bg-purple-50 p-6 text-center">
+<div class="text-4xl mb-3">&#128200;</div>
+<p class="font-bold text-lg">Résultat : plus d'informations visibles sans défilement</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 26: ÉQUIPEMENTS RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-26" class="section-wrapper" data-section="26">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Équipements</h2>
+</div>
+<div class="neo-box bg-purple-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur les Équipements</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Liste complète avec statut et emplacement</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Fiche détaillée avec historique complet</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Compteur d'heures en taille réduite (text-2xl)</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Espacement optimisé et vue plus compacte</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 27: PLANNING CALENDRIER -->
+<!-- ============================================================ -->
+<section id="section-27" class="section-wrapper" data-section="27">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Planning</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le calendrier mensuel montre <strong>toutes les interventions planifiées</strong>. On peut naviguer mois par mois pour voir ce qui est prévu.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102624.png" alt="Planning calendrier mensuel" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 28: PLANNING FONCTIONNALITÉS -->
+<!-- ============================================================ -->
+<section id="section-28" class="section-wrapper" data-section="28">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Fonctionnalités Planning</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="neo-box bg-blue-50 p-6 text-center">
+<div class="text-5xl mb-4">&#128400;</div>
+<h3 class="text-xl font-black mb-3">Glisser-déposer</h3>
+<p class="text-base">Déplacez une intervention d'une date à une autre en la faisant glisser directement sur le calendrier.</p>
+</div>
+<div class="neo-box bg-yellow-50 p-6 text-center">
+<div class="text-5xl mb-4">&#128065;</div>
+<h3 class="text-xl font-black mb-3">Clic pour détails</h3>
+<p class="text-base">Cliquez sur n'importe quelle intervention dans le calendrier pour voir ses détails complets.</p>
+</div>
+<div class="neo-box bg-green-50 p-6 text-center">
+<div class="text-5xl mb-4">&#127912;</div>
+<h3 class="text-xl font-black mb-3">Couleurs par priorité</h3>
+<p class="text-base">Chaque intervention est colorée selon sa priorité : rouge pour urgent, jaune pour normal, vert pour faible.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 29: PLANNING RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-29" class="section-wrapper" data-section="29">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Planning</h2>
+</div>
+<div class="neo-box bg-blue-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur le Planning</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Calendrier mensuel avec navigation mois par mois</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Glisser-déposer pour réorganiser les interventions</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Détails au clic sur chaque intervention</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Code couleur par niveau de priorité</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 30: CLIENTS LISTE -->
+<!-- ============================================================ -->
+<section id="section-30" class="section-wrapper" data-section="30">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Clients</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La liste de tous les clients avec leur <strong>nombre d'équipements</strong> et <strong>d'interventions</strong>. On voit rapidement quels clients ont le plus d'activité.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102639.png" alt="Liste des Clients" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 31: CLIENTS DÉTAIL -->
+<!-- ============================================================ -->
+<section id="section-31" class="section-wrapper" data-section="31">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Fiche Client</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La fiche client <strong>Vodacom Congo</strong> avec tous ses équipements et interventions associés. On voit tout l'historique du client en un seul endroit.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102709.png" alt="Détail Client Vodacom Congo" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 32: CLIENTS CRÉATION -->
+<!-- ============================================================ -->
+<section id="section-32" class="section-wrapper" data-section="32">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Nouveau Client</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le formulaire pour ajouter un nouveau client. <strong>Simple</strong> : nom, contact, adresse. Pas de champs inutiles, on va droit au but.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102653.png" alt="Nouveau client modal" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 33: CLIENTS ESPACEMENT -->
+<!-- ============================================================ -->
+<section id="section-33" class="section-wrapper" data-section="33">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Espacement Clients</h2>
+</div>
+<div class="neo-box bg-white p-8">
+<p class="text-lg leading-relaxed mb-6">
+L'espacement a été <strong>réduit</strong> sur la liste des clients et les fiches de détail. Même principe que pour les autres pages : plus de contenu visible à l'écran.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="neo-box-sm bg-yellow-50 p-5 text-center">
+<div class="font-black text-yellow-600 text-lg mb-2">Liste des clients</div>
+<p>Lignes plus rapprochées, plus de clients visibles sans défilement</p>
+</div>
+<div class="neo-box-sm bg-yellow-50 p-5 text-center">
+<div class="font-black text-yellow-600 text-lg mb-2">Fiche détail</div>
+<p>Sections plus compactes, meilleure lisibilité des informations</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 34: CLIENTS RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-34" class="section-wrapper" data-section="34">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Clients</h2>
+</div>
+<div class="neo-box bg-yellow-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur les Clients</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Liste complète avec compteurs d'équipements et interventions</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Fiche détaillée avec historique complet par client</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Formulaire de création simple et efficace</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Espacement optimisé sur toutes les vues</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 35: ÉQUIPES VUE -->
+<!-- ============================================================ -->
+<section id="section-35" class="section-wrapper" data-section="35">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Équipes</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La page des équipes montre <strong>tous les membres</strong> avec leurs <strong>rôles</strong> et <strong>disponibilités</strong>. On peut voir qui est disponible pour une intervention.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102721.png" alt="Page Équipes" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 36: ÉQUIPES AJOUT -->
+<!-- ============================================================ -->
+<section id="section-36" class="section-wrapper" data-section="36">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Ajouter un Membre</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le formulaire pour ajouter un nouveau membre à l'équipe. Nous avons ajouté la <strong>validation de l'email obligatoire</strong> et les <strong>messages d'erreur en ligne</strong>.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102736.png" alt="Ajouter un membre modal" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 37: ÉQUIPES VALIDATION -->
+<!-- ============================================================ -->
+<section id="section-37" class="section-wrapper" data-section="37">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Validation Email</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="neo-box bg-red-50 p-8">
+<h3 class="text-2xl font-black text-red-500 mb-4">AVANT</h3>
+<p class="text-lg leading-relaxed mb-4">
+On pouvait soumettre le formulaire d'ajout de membre <strong>sans renseigner l'email</strong>. Cela posait des problèmes car l'email est nécessaire pour les notifications et l'accès au compte.
+</p>
+<div class="bg-white border-2 border-gray-200 p-4 mt-4">
+<div class="text-sm text-gray-400 mb-1">Email</div>
+<div class="border border-gray-200 p-2 bg-gray-50 text-gray-300 italic">Vide — pas d'erreur affichée</div>
+</div>
+</div>
+<div class="neo-box bg-green-50 p-8">
+<h3 class="text-2xl font-black text-green-500 mb-4">APRÈS</h3>
+<p class="text-lg leading-relaxed mb-4">
+Le champ email est maintenant <strong>obligatoire</strong>. Si on essaie de soumettre le formulaire sans email, un <strong>message d'erreur clair</strong> s'affiche directement sous le champ.
+</p>
+<div class="bg-white border-2 border-red-400 p-4 mt-4">
+<div class="text-sm text-gray-400 mb-1">Email *</div>
+<div class="border-2 border-red-400 p-2 bg-red-50"></div>
+<div class="text-red-500 text-sm mt-1 font-bold">L'adresse email est obligatoire</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 38: ÉQUIPES RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-38" class="section-wrapper" data-section="38">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Équipes</h2>
+</div>
+<div class="neo-box bg-green-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur les Équipes</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Vue d'ensemble des membres avec rôles et disponibilités</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Formulaire d'ajout avec validation renforcée</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Email obligatoire avec messages d'erreur en ligne</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Meilleure gestion des erreurs de formulaire</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 39: FACTURATION VUE -->
+<!-- ============================================================ -->
+<section id="section-39" class="section-wrapper" data-section="39">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Facturation</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La page de facturation avec les <strong>devis et factures</strong>. On peut suivre les montants, les statuts de paiement et créer de nouveaux documents.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102748.png" alt="Page Facturation" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 40: FACTURATION DEVIS -->
+<!-- ============================================================ -->
+<section id="section-40" class="section-wrapper" data-section="40">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Nouveau Devis</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+Le formulaire de création de devis permet de générer rapidement un devis pour un client avec le détail des prestations.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102803.png" alt="Formulaire Nouveau Devis" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 41: FACTURATION RBAC -->
+<!-- ============================================================ -->
+<section id="section-41" class="section-wrapper" data-section="41">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Permissions Facturation</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-6">Correction des rôles d'accès</h3>
+<p class="text-lg leading-relaxed mb-8">
+Nous avons vérifié et corrigé les permissions d'accès à la facturation. Le problème : il fallait avoir le rôle spécifique <strong>billing_agent</strong> pour voir cette page, alors que les administrateurs terrain (<strong>agent_admin</strong>) en avaient aussi besoin.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="neo-box bg-red-50 p-6">
+<h4 class="font-black text-red-500 mb-3">AVANT</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-2"><span class="text-red-500">&#10007;</span> <strong>agent_admin</strong> — Pas d'accès</div>
+<div class="flex items-center gap-2"><span class="text-green-500">&#10003;</span> <strong>billing_agent</strong> — Accès</div>
+<div class="flex items-center gap-2"><span class="text-green-500">&#10003;</span> <strong>super_admin</strong> — Accès</div>
+</div>
+</div>
+<div class="neo-box bg-green-50 p-6">
+<h4 class="font-black text-green-500 mb-3">APRÈS</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-2"><span class="text-green-500">&#10003;</span> <strong>agent_admin</strong> — Accès accordé</div>
+<div class="flex items-center gap-2"><span class="text-green-500">&#10003;</span> <strong>billing_agent</strong> — Accès</div>
+<div class="flex items-center gap-2"><span class="text-green-500">&#10003;</span> <strong>super_admin</strong> — Accès</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 42: FACTURATION RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-42" class="section-wrapper" data-section="42">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Facturation</h2>
+</div>
+<div class="neo-box bg-red-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur la Facturation</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Page de facturation avec suivi des devis et factures</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Formulaire de création de devis fonctionnel</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Permissions corrigées : agent_admin a désormais accès</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Rôles RBAC vérifiés et conformes</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 43: REPORTING VUE -->
+<!-- ============================================================ -->
+<section id="section-43" class="section-wrapper" data-section="43">
+<div class="max-w-6xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Reporting &amp; Analyse</h2>
+</div>
+<p class="text-xl mb-8 max-w-3xl">
+La page Reporting &amp; Analyse avec les <strong>graphiques et statistiques</strong>. C'est ici qu'on analyse la performance globale de la maintenance.
+</p>
+<div class="neo-frame bg-white p-2">
+<img src="screenshot-102843.png" alt="Reporting et Analyse" class="w-full screenshot-img" loading="lazy">
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 44: REPORTING COMPARAISON -->
+<!-- ============================================================ -->
+<section id="section-44" class="section-wrapper" data-section="44">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Comparaison de Périodes</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<span class="inline-block bg-blue-500 text-white text-sm font-black px-3 py-1 mb-6">NOUVELLE FONCTIONNALITÉ</span>
+<h3 class="text-2xl font-black mb-6">Comparer deux périodes</h3>
+<p class="text-lg leading-relaxed mb-8">
+On peut maintenant comparer deux périodes entre elles. Par exemple : <strong>ce mois-ci</strong> versus <strong>le mois dernier</strong>. Des badges colorés montrent si les indicateurs sont en hausse ou en baisse.
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="neo-box-sm bg-green-50 p-5 text-center">
+<div class="text-3xl font-black text-green-600">+12%</div>
+<div class="text-sm font-bold mt-1">Taux de résolution</div>
+<span class="inline-block bg-green-500 text-white text-xs font-black px-2 py-1 mt-2">EN HAUSSE</span>
+</div>
+<div class="neo-box-sm bg-red-50 p-5 text-center">
+<div class="text-3xl font-black text-red-600">+3</div>
+<div class="text-sm font-bold mt-1">Interventions en retard</div>
+<span class="inline-block bg-red-500 text-white text-xs font-black px-2 py-1 mt-2">EN HAUSSE</span>
+</div>
+<div class="neo-box-sm bg-green-50 p-5 text-center">
+<div class="text-3xl font-black text-green-600">-2j</div>
+<div class="text-sm font-bold mt-1">Délai moyen</div>
+<span class="inline-block bg-green-500 text-white text-xs font-black px-2 py-1 mt-2">AMÉLIORATION</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 45: REPORTING MTBF -->
+<!-- ============================================================ -->
+<section id="section-45" class="section-wrapper" data-section="45">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Pannes MTBF</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-4">Mean Time Between Failures</h3>
+<p class="text-lg leading-relaxed mb-6">
+Le MTBF (temps moyen entre les pannes) est un indicateur clé. Il montre <strong>combien de temps en moyenne</strong> un équipement fonctionne avant de tomber en panne.
+</p>
+<p class="text-lg leading-relaxed mb-8">
+Plus le MTBF est élevé, mieux c'est — cela signifie que l'équipement est <strong>fiable</strong> et bien entretenu.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="neo-box bg-green-50 p-6 text-center">
+<div class="text-4xl font-black text-green-600">720h</div>
+<div class="font-bold mt-2">GE-001 Lubumbashi</div>
+<div class="text-sm text-green-500 mt-1">Excellent</div>
+</div>
+<div class="neo-box bg-yellow-50 p-6 text-center">
+<div class="text-4xl font-black text-yellow-600">340h</div>
+<div class="font-bold mt-2">GE-005 Kolwezi</div>
+<div class="text-sm text-yellow-500 mt-1">Correct</div>
+</div>
+<div class="neo-box bg-red-50 p-6 text-center">
+<div class="text-4xl font-black text-red-600">85h</div>
+<div class="font-bold mt-2">GE-012 Kinshasa</div>
+<div class="text-sm text-red-500 mt-1">À surveiller</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 46: REPORTING SCROLL -->
+<!-- ============================================================ -->
+<section id="section-46" class="section-wrapper" data-section="46">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-red-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Correction du Scroll Mobile</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<span class="inline-block bg-red-500 text-white text-sm font-black px-3 py-1 mb-6">BUG CORRIGÉ</span>
+<h3 class="text-2xl font-black mb-6">Le problème</h3>
+<p class="text-lg leading-relaxed mb-6">
+Sur mobile, quand on ouvrait un tableau détaillé dans la section Reporting, on restait <strong>bloqué à l'intérieur du tableau</strong> sans pouvoir remonter dans la page. C'était très frustrant pour les utilisateurs.
+</p>
+<h3 class="text-2xl font-black mb-4">La solution</h3>
+<p class="text-lg leading-relaxed mb-6">
+Nous avons remplacé les <strong>conteneurs de scroll imbriqués</strong> (un scroll dans un scroll) par un <strong>seul conteneur de scroll</strong>. Maintenant, le défilement est fluide partout, même dans les tableaux détaillés.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="neo-box-sm bg-red-50 p-5 text-center">
+<div class="text-4xl mb-2">&#128241;</div>
+<h4 class="font-black text-red-500">AVANT</h4>
+<p class="text-sm mt-2">Scroll bloqué dans les tableaux, impossible de remonter</p>
+</div>
+<div class="neo-box-sm bg-green-50 p-5 text-center">
+<div class="text-4xl mb-2">&#128241;</div>
+<h4 class="font-black text-green-500">APRÈS</h4>
+<p class="text-sm mt-2">Scroll fluide et naturel partout</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 47: REPORTING RÉSUMÉ -->
+<!-- ============================================================ -->
+<section id="section-47" class="section-wrapper" data-section="47">
+<div class="max-w-4xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-purple-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Résumé — Reporting</h2>
+</div>
+<div class="neo-box bg-purple-50 p-8">
+<h3 class="text-2xl font-black mb-6">Changements sur le Reporting</h3>
+<ul class="space-y-3 text-lg">
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Page complète avec graphiques et statistiques</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Comparaison de périodes avec badges de tendance</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Indicateurs MTBF pour chaque équipement</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Bug de scroll mobile corrigé</li>
+<li class="flex items-center gap-3"><span class="text-green-500 font-black text-xl">&#10003;</span> Navigation fluide dans les tableaux détaillés</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 48: CORRECTIONS ACCENTS -->
+<!-- ============================================================ -->
+<section id="section-48" class="section-wrapper" data-section="48">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-blue-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Correction des Accents</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-6">Le français, c'est important !</h3>
+<p class="text-lg leading-relaxed mb-8">
+Les graphiques et labels affichaient des mots <strong>sans accents</strong>. Par exemple, "Preventive" au lieu de "Préventive", "Completee" au lieu de "Complétée". Nous avons créé une <strong>fonction automatique</strong> qui corrige ces erreurs partout dans l'application.
+</p>
+<div class="space-y-4 mb-8">
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<div class="neo-box-sm bg-red-50 px-6 py-3 font-mono font-bold text-red-600 text-center flex-1 w-full">Preventive</div>
+<span class="text-2xl font-black">&#8594;</span>
+<div class="neo-box-sm bg-green-50 px-6 py-3 font-mono font-bold text-green-600 text-center flex-1 w-full">Préventive</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<div class="neo-box-sm bg-red-50 px-6 py-3 font-mono font-bold text-red-600 text-center flex-1 w-full">Completee</div>
+<span class="text-2xl font-black">&#8594;</span>
+<div class="neo-box-sm bg-green-50 px-6 py-3 font-mono font-bold text-green-600 text-center flex-1 w-full">Complétée</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<div class="neo-box-sm bg-red-50 px-6 py-3 font-mono font-bold text-red-600 text-center flex-1 w-full">Creee</div>
+<span class="text-2xl font-black">&#8594;</span>
+<div class="neo-box-sm bg-green-50 px-6 py-3 font-mono font-bold text-green-600 text-center flex-1 w-full">Créée</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<div class="neo-box-sm bg-red-50 px-6 py-3 font-mono font-bold text-red-600 text-center flex-1 w-full">Equipement</div>
+<span class="text-2xl font-black">&#8594;</span>
+<div class="neo-box-sm bg-green-50 px-6 py-3 font-mono font-bold text-green-600 text-center flex-1 w-full">Équipement</div>
+</div>
+</div>
+<div class="neo-box-sm bg-blue-50 p-5">
+<span class="font-black text-blue-600">&#9881; Solution technique :</span> Une fonction <code class="bg-gray-100 px-2 py-1 font-mono text-sm">normalizeAccents()</code> est appliquée automatiquement à tous les textes et labels de l'application.
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 49: CORRECTIONS MOBILE -->
+<!-- ============================================================ -->
+<section id="section-49" class="section-wrapper" data-section="49">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-green-500"></div>
+<h2 class="text-4xl md:text-6xl font-black">Scroll Mobile Corrigé</h2>
+</div>
+<div class="neo-box bg-white p-8 md:p-12">
+<h3 class="text-2xl font-black mb-6">Une expérience fluide sur téléphone</h3>
+<p class="text-lg leading-relaxed mb-6">
+Le scroll sur mobile est maintenant <strong>fluide partout</strong>. Plus de blocage dans les tableaux. Le problème venait de <strong>conteneurs de défilement imbriqués</strong> : un élément scrollable à l'intérieur d'un autre élément scrollable.
+</p>
+<p class="text-lg leading-relaxed mb-8">
+La solution : nous avons remplacé ces imbrications par un <strong>seul conteneur de scroll principal</strong>. Les tableaux s'adaptent maintenant à la largeur de l'écran ou permettent un scroll horizontal sans bloquer le scroll vertical de la page.
+</p>
+<div class="neo-box bg-gradient-to-r from-green-50 to-blue-50 p-8 text-center">
+<div class="text-5xl mb-4">&#128241; &#10140; &#128077;</div>
+<p class="text-xl font-black">Résultat : navigation mobile enfin fluide et naturelle</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 50: BILAN & REMERCIEMENTS -->
+<!-- ============================================================ -->
+<section id="section-50" class="section-wrapper" data-section="50">
+<div class="max-w-5xl mx-auto w-full fade-in">
+<div class="flex items-center gap-4 mb-10">
+<div class="w-2 h-16 bg-yellow-400"></div>
+<h2 class="text-4xl md:text-6xl font-black">Bilan &amp; Remerciements</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+<div class="neo-box bg-green-400 p-8 text-center">
+<div class="text-5xl font-black">46</div>
+<div class="font-bold mt-2 text-lg">Points résolus</div>
+</div>
+<div class="neo-box bg-yellow-300 p-8 text-center">
+<div class="text-5xl font-black">14</div>
+<div class="font-bold mt-2 text-lg">Points améliorés</div>
+</div>
+<div class="neo-box bg-blue-400 text-white p-8 text-center">
+<div class="text-5xl font-black">11</div>
+<div class="font-bold mt-2 text-lg">Nouvelles fonctionnalités</div>
+</div>
+</div>
+<div class="neo-box bg-white p-8 md:p-12 mb-8">
+<h3 class="text-2xl font-black mb-6">Merci !</h3>
+<p class="text-lg leading-relaxed mb-6">
+Merci à l'équipe <strong>Forrest Groupe</strong> pour leurs retours détaillés et leur collaboration tout au long de ce processus d'amélioration. Chaque point remonté a été analysé et traité avec attention.
+</p>
+<p class="text-lg leading-relaxed mb-6">
+Cette version 1.5 représente un pas important vers une application <strong>plus robuste, plus intuitive et plus adaptée</strong> aux besoins du terrain.
+</p>
+<h3 class="text-2xl font-black mb-4 mt-8">Prochaines étapes — V2.0</h3>
+<ul class="space-y-2 text-lg mb-8">
+<li class="flex items-center gap-3"><span class="text-blue-500 font-black">&#8594;</span> Mode hors-ligne pour les techniciens sur le terrain</li>
+<li class="flex items-center gap-3"><span class="text-blue-500 font-black">&#8594;</span> Notifications push en temps réel</li>
+<li class="flex items-center gap-3"><span class="text-blue-500 font-black">&#8594;</span> Application mobile native</li>
+<li class="flex items-center gap-3"><span class="text-blue-500 font-black">&#8594;</span> Intégration IoT pour le suivi automatique des heures</li>
+</ul>
+<div class="border-t-4 border-black pt-6 mt-6">
+<p class="font-black text-xl mb-2">Explorialabs</p>
+<p class="text-gray-600">contact@explorialabs.com</p>
+<p class="text-gray-400 text-sm mt-2">Présentation — Février 2026</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EASTER EGG 3: Hidden message at very bottom -->
+<div id="hiddenMessage" class="text-center py-20 opacity-0 transition-opacity duration-1000">
+<p class="text-gray-300 text-sm font-bold">Built with &#10084;&#65039; by Explorialabs — 2026</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+// --- SECTION COUNT ---
+const TOTAL_SECTIONS = 50;
+
+// --- PROGRESS BAR ---
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressBar').style.width = progress + '%';
+}
+
+// --- NAV DOTS ---
+function createNavDots() {
+  const nav = document.getElementById('navDots');
+  if (!nav) return;
+  for (let i = 1; i <= TOTAL_SECTIONS; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    dot.title = 'Section ' + i;
+    dot.dataset.section = i;
+    dot.addEventListener('click', function() {
+      const target = document.getElementById('section-' + i);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+    nav.appendChild(dot);
+  }
+}
+
+function updateNavDots() {
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = document.querySelectorAll('[data-section]');
+  let currentSection = 1;
+  sections.forEach(function(sec) {
+    const rect = sec.getBoundingClientRect();
+    if (rect.top <= window.innerHeight / 2) {
+      currentSection = parseInt(sec.dataset.section);
+    }
+  });
+  dots.forEach(function(dot) {
+    dot.classList.toggle('active', parseInt(dot.dataset.section) === currentSection);
+  });
+}
+
+// --- INTERSECTION OBSERVER (FADE-IN / SLIDE) ---
+function setupObserver() {
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// --- EASTER EGG 1: CONFETTI ---
+let coverClicks = 0;
+function handleCoverClick() {
+  coverClicks++;
+  if (coverClicks >= 5) {
+    coverClicks = 0;
+    launchConfetti();
+  }
+}
+
+function launchConfetti() {
+  const colors = ['#3B82F6', '#FBBF24', '#10B981', '#EF4444', '#8B5CF6', '#F97316', '#EC4899'];
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.top = '-10px';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (Math.random() * 10 + 5) + 'px';
+    piece.style.height = (Math.random() * 10 + 5) + 'px';
+    piece.style.animationDelay = Math.random() * 2 + 's';
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    if (Math.random() > 0.5) piece.style.borderRadius = '50%';
+    document.body.appendChild(piece);
+    setTimeout(function() { piece.remove(); }, 5000);
+  }
+}
+
+// --- EASTER EGG 2: RAINBOW BORDER ON SCREENSHOT HOVER ---
+function setupScreenshotEasterEgg() {
+  document.querySelectorAll('.screenshot-img').forEach(function(img) {
+    let hoverTimer = null;
+    img.addEventListener('mouseenter', function() {
+      hoverTimer = setTimeout(function() {
+        img.parentElement.classList.add('rainbow-border');
+      }, 3000);
+    });
+    img.addEventListener('mouseleave', function() {
+      clearTimeout(hoverTimer);
+      img.parentElement.classList.remove('rainbow-border');
+    });
+  });
+}
+
+// --- EASTER EGG 3: HIDDEN BOTTOM MESSAGE ---
+function checkBottomMessage() {
+  const msg = document.getElementById('hiddenMessage');
+  if (!msg) return;
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (docHeight - scrollTop < 50) {
+    msg.style.opacity = '1';
+  } else {
+    msg.style.opacity = '0';
+  }
+}
+
+// --- SPIN LOGO ---
+function spinLogo(el) {
+  el.classList.remove('spin-logo');
+  void el.offsetWidth;
+  el.classList.add('spin-logo');
+  setTimeout(function() { el.classList.remove('spin-logo'); }, 1000);
+}
+
+// --- SCROLL EVENT ---
+let ticking = false;
+window.addEventListener('scroll', function() {
+  if (!ticking) {
+    window.requestAnimationFrame(function() {
+      updateProgress();
+      updateNavDots();
+      checkBottomMessage();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// --- INIT ---
+document.addEventListener('DOMContentLoaded', function() {
+  createNavDots();
+  setupObserver();
+  setupScreenshotEasterEgg();
+  updateProgress();
+  updateNavDots();
+});
+</script>
+</body>
+</html>
